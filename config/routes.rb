@@ -1,4 +1,4 @@
-Allin::Application.routes.draw do |map|
+Tullies::Application.routes.draw do |map|
   map.home '', :controller => 'meetings', :action => 'index'
   
   map.meeting_topic_new 'meetings/topic', :conditions => { :method => :get  }, :controller => 'meetings', :action => 'topic_get'
@@ -14,6 +14,6 @@ Allin::Application.routes.draw do |map|
     
   map.meeting_done 'meetings/:id/done', :conditions => { :method => :get  }, :controller => 'meetings', :action => 'done'
   
-  #resources :meetings
+  resources :meetings
 
 end
