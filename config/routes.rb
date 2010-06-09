@@ -1,58 +1,19 @@
-Tullies::Application.routes.draw do |map|
-  # The priority is based upon order of creation:
-  # first created -> highest priority.
+Allin::Application.routes.draw do |map|
+  map.home '', :controller => 'meetings', :action => 'index'
+  
+  map.meeting_topic_new 'meetings/topic', :conditions => { :method => :get  }, :controller => 'meetings', :action => 'topic_get'
+  map.meeting_topic_new_post 'meetings/topic', :conditions => { :method => :post  }, :controller => 'meetings', :action => 'topic_post'
+  map.meeting_topic_get 'meetings/:id/topic', :conditions => { :method => :get  }, :controller => 'meetings', :action => 'topic_get'
+  map.meeting_topic_post 'meetings/:id/topic', :conditions => { :method => :post }, :controller => 'meetings', :action => 'topic_post'
+  
+  map.meeting_goal_get 'meetings/:id/goals', :conditions => { :method => :get  }, :controller => 'meetings', :action => 'goal_get'
+  map.meeting_goal_post 'meetings/:id/goals', :conditions => { :method => :post }, :controller => 'meetings', :action => 'goal_post'
+  
+  map.meeting_agenda_get 'meetings/:id/agendas', :conditions => { :method => :get  }, :controller => 'meetings', :action => 'agenda_get'
+  map.meeting_agenda_post 'meetings/:id/agendas', :conditions => { :method => :post }, :controller => 'meetings', :action => 'agenda_post'
+    
+  map.meeting_done 'meetings/:id/done', :conditions => { :method => :get  }, :controller => 'meetings', :action => 'done'
+  
+  #resources :meetings
 
-  # Sample of regular route:
-  #   match 'products/:id' => 'catalog#view'
-  # Keep in mind you can assign values other than :controller and :action
-
-  # Sample of named route:
-  #   match 'products/:id/purchase' => 'catalog#purchase', :as => :purchase
-  # This route can be invoked with purchase_url(:id => product.id)
-
-  # Sample resource route (maps HTTP verbs to controller actions automatically):
-  #   resources :products
-
-  # Sample resource route with options:
-  #   resources :products do
-  #     member do
-  #       get :short
-  #       post :toggle
-  #     end
-  #
-  #     collection do
-  #       get :sold
-  #     end
-  #   end
-
-  # Sample resource route with sub-resources:
-  #   resources :products do
-  #     resources :comments, :sales
-  #     resource :seller
-  #   end
-
-  # Sample resource route with more complex sub-resources
-  #   resources :products do
-  #     resources :comments
-  #     resources :sales do
-  #       get :recent, :on => :collection
-  #     end
-  #   end
-
-  # Sample resource route within a namespace:
-  #   namespace :admin do
-  #     # Directs /admin/products/* to Admin::ProductsController
-  #     # (app/controllers/admin/products_controller.rb)
-  #     resources :products
-  #   end
-
-  # You can have the root of your site routed with "root"
-  # just remember to delete public/index.html.
-  # root :to => "welcome#index"
-
-  # See how all your routes lay out with "rake routes"
-
-  # This is a legacy wild controller route that's not recommended for RESTful applications.
-  # Note: This route will make all actions in every controller accessible via GET requests.
-  # match ':controller(/:action(/:id(.:format)))'
 end

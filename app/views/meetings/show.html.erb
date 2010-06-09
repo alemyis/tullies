@@ -1,0 +1,47 @@
+<% title "Meeting" %>
+<div style="float:right">
+  <%= render "qmuc" %>
+</div>
+<div>
+  <p>
+    <strong>Topic:</strong>
+    <%= @meeting.topic %>
+  </p>
+  <p>
+    <strong>Description:</strong>
+    <%= @meeting.description %>
+  </p>
+  <p>
+    <strong>Location:</strong>
+    <%= @meeting.location %>
+  </p>
+  <p>
+    <strong>Duration:</strong>
+    <%= @meeting.getHours %> Hours <%= @meeting.getMinutes %> Minutes
+  </p>
+  <p>
+    <strong>Start At:</strong>
+    <%= @meeting.start_at %>
+  </p>
+  <p>
+    <strong>Goals:</strong>
+    <ol>  
+      <% for goal in @meeting.goals %>  
+      <li><%= goal.content %></li>  
+      <% end %>  
+    </ol>
+  </p>
+  <p>
+    <strong>Agendas:</strong>
+    <ol>  
+      <% for agenda in @meeting.agendas %>  
+      <li><%= agenda.content %> | <%= agenda.duration %>mins</li>  
+      <% end %>  
+    </ol>
+  </p>
+  <p>
+    <%= link_to "Edit", edit_meeting_path(@meeting) %> |
+    <%= link_to "Destroy", @meeting, :confirm => 'Are you sure?', :method => :delete %> |
+    <%= link_to "View All", meetings_path %>
+  </p>
+</div>
