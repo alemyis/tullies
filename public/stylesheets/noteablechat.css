@@ -1,0 +1,64 @@
+#noteablechat_box
+{
+    width:500px;
+    border:0px;
+}
+
+#noteablechat_topic
+{
+    border:2px solid black;
+    background-color: rgb(240, 241, 147);
+    height: 30px;
+    text-align: center;
+    vertical-align: middle;
+    margin-bottom: 3px;
+}
+
+#noteablechat_chatlog
+{
+    height:300px;
+    overflow: auto;
+}
+
+#noteablechat_roster
+{
+    float:right;
+    /*hide roster*/
+    display:none;
+    width:70px;
+    height:300px;
+}
+
+#noteablechat_msgArea
+{
+    margin-top: 5px;
+    width:100%;
+}
+
+#noteablechat_postButton
+{
+    float:right;
+    border:1px solid gray;
+}
+
+.noteablechat_log_message
+{
+    padding-bottom: 5px;
+}
+
+.noteablechat_log_nickname
+{
+    /*hide nickname*/
+    display: none;
+}
+
+.noteablechat_log_timestamp
+{
+    color: silver;
+}
+
+.noteablechat_log_i_joined, .noteablechat_log_user_joined, .noteablechat_log_user_left
+{
+    /*hide login activities*/
+    display: none;
+}
