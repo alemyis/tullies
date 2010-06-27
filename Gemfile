@@ -9,6 +9,10 @@ gem 'rails', '3.0.0.beta4'
 gem 'sqlite3-ruby', '1.2.5', :require => 'sqlite3'
 gem "nifty-generators"
 gem "ruby-debug"
+gem "rest-client"
+gem "hpricot"
+gem "SystemTimer"
+#gem 'ruby_bosh', :git => 'git://github.com/alemyis/ruby_bosh.git'
 
 
 # Use unicorn as the web server

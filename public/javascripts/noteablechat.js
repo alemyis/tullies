@@ -46,6 +46,8 @@ var NoteableChat = {
     //
     loginSIDOnPage : function(data){
         Strophe.info('Login started...');
+	NoteableChat.room = data.room;
+	NoteableChat.nickname = data.nickname;
         NoteableChat.connection.attach(data.jid, data.sid, data.rid, NoteableChat.onConnect);
         Strophe.info('Login complete.');
     },
@@ -58,17 +60,19 @@ var NoteableChat = {
         
         Strophe.debug('Getting SID from SID service...');
             
-        $.getJSON(serviceURL.jsonURL, function(sessionData) {
+        $.getJSON(serviceURL.jsonURL, function(data) {
             Strophe.debug('SID service returned...');
             try
             {
-              NoteableChat.connection.attach(sessionData.jid, sessionData.sid, sessionData.rid, NoteableChat.onConnect);
+		NoteableChat.room = data.room;
+		NoteableChat.nickname = data.nickname;
+		NoteableChat.connection.attach(data.jid, data.sid, data.rid, NoteableChat.onConnect);
               
-              Strophe.info('Login complete.');
+		Strophe.info('Login complete.');
               
             }catch(e)
             {
-              Strophe.error('Login failed: ' + e.message);
+		Strophe.error('Login failed: ' + e.message);
             }
         
         });
@@ -79,6 +83,8 @@ var NoteableChat = {
     //
     loginUsernamePassword : function(data){
         Strophe.info('Login started...');
+	NoteableChat.room = data.room;
+	NoteableChat.nickname = data.nickname;
         NoteableChat.connection.connect(data.jid, data.password, NoteableChat.onConnect);
         Strophe.info('Login complete.');
     },
@@ -254,10 +260,7 @@ var NoteableChat = {
 //
 $(document).bind('connect', function(e, d){
    NoteableChat.connection = new Strophe.Connection(BOSH_SERVICE);
-   NoteableChat.room = 'somemuc@conference.dev.qworky.net';
-   NoteableChat.nickname = 'somenickname' + (new Date()).getTime();
-   NoteableChat.loginUsernamePassword({jid:'somejid@dev.qworky.net', password: 'somepassword' });
-   //NoteableChat.loginSIDFromServer({jsonURL: '/newchatsession.json'});
+   NoteableChat.loginSIDFromServer({jsonURL: $('#notablechat_service_url').val()});
 });
 
 $(document).bind('connected', function(){

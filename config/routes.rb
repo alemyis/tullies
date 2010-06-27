@@ -13,6 +13,8 @@ Tullies::Application.routes.draw do |map|
   map.meeting_agenda_post 'meetings/:id/agendas', :conditions => { :method => :post }, :controller => 'meetings', :action => 'agenda_post'
     
   map.meeting_done 'meetings/:id/done', :conditions => { :method => :get  }, :controller => 'meetings', :action => 'done'
+
+  map.bosh_session 'meetings/:id/boshsession', :conditions => {:method => :get }, :controller => 'meetings', :action => 'new_boshsession'
   
   resources :meetings
 

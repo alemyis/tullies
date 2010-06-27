@@ -1,3 +1,5 @@
+require 'Ruby_Bosh'
+
 class MeetingsController < ApplicationController
   def index
     @meetings = Meeting.all
@@ -129,4 +131,22 @@ class MeetingsController < ApplicationController
     redirect_to meetings_url
   end
   
+  def new_boshsession
+    
+    xmpp_server = 'someservername'
+    xmpp_bosh_port = '5280'
+    username = 'someusername'
+    password = 'somepassword'
+    jid = "#{username}@#{xmpp_server}"
+    server_url = "http://#{xmpp_server}:#{xmpp_bosh_port}/http-bind/"
+    room = "someroom@conference.#{xmpp_server}"
+    nickname = "#{username}#{Time.new.tv_sec}"
+    
+    @session_jid, @session_id, @session_random_id = RubyBOSH.initialize_session(jid,
+                                                                                password,
+                                                                                server_url,
+                                                                                {:timeout => 20})
+  
+    render :json => {:jid=>@session_jid, :sid=>@session_id, :rid=>@session_random_id, :room => room, :nickname => nickname}
+  end
 end
