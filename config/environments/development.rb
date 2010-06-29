@@ -16,4 +16,6 @@ Tullies::Application.configure do
 
   # Don't care if the mailer can't send
   config.action_mailer.raise_delivery_errors = false
+  
+  NOTEABLECHAT_CONFIG = YAML.load_file("#{RAILS_ROOT}/config/noteablechat.yml")
 end

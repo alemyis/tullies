@@ -39,4 +39,6 @@ Tullies::Application.configure do
 
   # Enable threaded mode
   # config.threadsafe!
+  
+  NOTEABLECHAT_CONFIG = YAML.load_file("#{RAILS_ROOT}/config/noteablechat.yml")
 end

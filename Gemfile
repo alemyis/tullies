@@ -13,7 +13,7 @@ gem "rest-client"
 gem "hpricot"
 gem "SystemTimer"
 #gem 'ruby_bosh', :git => 'git://github.com/alemyis/ruby_bosh.git'
-
+gem 'xmpp4r'
 
 # Use unicorn as the web server
 # gem 'unicorn'
