@@ -11,6 +11,17 @@ var NoteableChat = {
     // Send msg based on type ('chat' or 'groupchat')
     //
     sendMsg : function(body){
+	if (body.match(/^\/topic (.+)/)) {
+	    var topic = body.replace(/^\/topic (.+)/,"$1");
+	    return NoteableChat.sendTopic(topic);
+	}else{
+	    return NoteableChat.sendIM(body);
+	}
+    },
+    //
+    // Send group message
+    //
+    sendIM : function(body){
 	Strophe.debug('Sending IM...');
 	if(NoteableChat._isNullOrEmpty(body) ) return false;
         
@@ -24,10 +35,10 @@ var NoteableChat = {
     // Send special message to room topic
     //
     sendTopic : function(topic){       
-	Strophe.debug('Sending topic...')
+	Strophe.debug('Sending topic...');
 	NoteableChat.connection.send($msg({
             to: NoteableChat.room,
-            type: "groupchat"}).c('subject').text(topic)); 
+            type: "groupchat"}).c('subject').t(topic)); 
 	
 	return false;
     },
@@ -139,7 +150,7 @@ var NoteableChat = {
         var from = $(pres).attr('from');
         var room = Strophe.getBareJidFromJid(from);
         
-        if(room === NoteableChat.room){
+        if(room.toLowerCase() === NoteableChat.room.toLowerCase()){
             var nickname = Strophe.getResourceFromJid(from);
             
             if($(pres).attr('type') === 'error' && !NoteableChat.joined){
@@ -184,7 +195,7 @@ var NoteableChat = {
         var room = Strophe.getBareJidFromJid(from);
         var nickname = Strophe.getResourceFromJid(from);
         
-        if(room === NoteableChat.room){
+        if(room.toLowerCase() === NoteableChat.room.toLowerCase()){
             //message from room or user?
             var notice = !nickname;
             
@@ -197,13 +208,10 @@ var NoteableChat = {
 	    if(delayed){
 		timestamp = $(msg).children('delay').attr('stamp');
 	    }
-	    
-            var subject = $(msg).children('subject').text();
+	    var subject = $(msg).children('subject').text();
             if(subject){
                 $('#noteablechat_topic').text(subject);
-            }
-            
-            if(!notice){
+            }else if(!notice){
                 NoteableChat.addMessage('<div><div class="noteablechat_log_timestamp">' + timestamp + '</div><div class="noteablechat_log_nickname">' + nickname + ': </div><div class="noteablechat_log_message">' + body + '</div></div>');
             }else{
                 NoteableChat.addMessage('<div>***' + body + '</div>');
