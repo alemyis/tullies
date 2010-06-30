@@ -156,7 +156,7 @@ class MeetingsController < ApplicationController
   
   def get_jid
     if(session[:guest_jid].nil?)
-      session[:guest_jid] = "guest#{rand(9999)}"
+      session[:guest_jid] = "#{NOTEABLECHAT_CONFIG['guest_jid']}#{rand(9999)}"
       create_jid(session[:guest_jid])
     end
     session[:guest_jid]
