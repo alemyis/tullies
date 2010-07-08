@@ -21,8 +21,9 @@
   #sub-domain for chat rooms
   muc_namespace: conference.dev.qworky.net
   
-  #meeting chat rooms are named [Noteablechat_Meeting_Room_<meetingID>]
-  muc_name_constant: Noteablechat_Meeting_Room_
+  #meeting chat rooms are named [noteablechat_room_<meetingID>]
+  muc_name_constant: noteablechat_room_
   
   #Base website URL
   site_base: http://localhost
+  
