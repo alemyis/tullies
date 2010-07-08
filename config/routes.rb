@@ -14,7 +14,7 @@ Tullies::Application.routes.draw do |map|
     
   map.meeting_done 'meetings/:id/done', :conditions => { :method => :get  }, :controller => 'meetings', :action => 'done'
 
-  map.bosh_session 'meetings/:id/boshsession', :conditions => {:method => :get }, :controller => 'meetings', :action => 'new_boshsession'
+  map.bosh_session '/noteablechat/boshsession/:room_jid', :conditions => {:method => :get }, :controller => 'noteablechat', :action => 'new_boshsession'
   
   resources :meetings
 
