@@ -1,10 +1,47 @@
+--------------
+Noteable chat:
+--------------
+   --server components
+	./app/controllers/noteablechat_controller.rb
+	./app/helpers/noteablechat.rb
 
-rails g nifty:layout
+   --configuration
+	./config/noteablechat.yml
 
-rails g nifty:scaffold meeting topic:string description:string location:string duration:integer start_at:datetime
+   --client components
+	./app/views/meetings/_noteablechat.html.erb
+	./public/javascripts/noteablechat.js
+	./public/stylesheets/noteablechat.css
 
-rails g nifty:scaffold item meeting_id:integer content:string
+   --usage exmple
+	./app/models/meeting.rb
+	./config/routes.rb
+	./config/environments/development.rb
+	./config/environments/production.rb
 
-rails g nifty:scaffold goal meeting_id:integer content:string
 
-rails g nifty:scaffold agenda meeting_id:integer content:string duration:integer
+   --Dependancies
+
+	gem "rest-client"
+	gem "hpricot"
+	gem "SystemTimer"
+	gem 'ruby_bosh', :git => 'git://github.com/alemyis/ruby_bosh.git' #Forked from http://github.com/skyfallsin/ruby_bosh to fix a bug on it.
+	gem 'xmpp4r'
+        
+        
+        
+-----------------
+Meeting template:
+-----------------
+
+   rails g nifty:layout
+
+   rails g nifty:scaffold meeting topic:string description:string location:string duration:integer start_at:datetime
+
+   rails g nifty:scaffold item meeting_id:integer content:string
+
+   rails g nifty:scaffold goal meeting_id:integer content:string
+
+   rails g nifty:scaffold agenda meeting_id:integer content:string duration:integer
+
+
