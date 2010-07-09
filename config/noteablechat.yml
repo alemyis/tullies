@@ -15,6 +15,9 @@
   #Set true if you want a JID to be created on xmpp_server when users register on qworky site
   create_jid: true
   
+  #Guest JIDs will be Guest<random-number>
+  guest_jid: Guest
+  
   #default password for user JIDs on xmpp_server
   default_pwd: somepassword
   

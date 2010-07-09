@@ -6,6 +6,7 @@ var NoteableChat = {
     nickname: null,
     joined: null,
     participants: null,
+    lastmessagefrom: null,
     
     //
     // Send msg based on type ('chat' or 'groupchat')
@@ -212,8 +213,16 @@ var NoteableChat = {
             if(subject){
                 $('#noteablechat_topic').text('Currently Discussing:' + subject);
             }else if(!notice){
-                NoteableChat.addMessage('<div><div class="noteablechat_log_timestamp">' + timestamp + '</div><div class="noteablechat_log_nickname">' + nickname + ': </div><div class="noteablechat_log_message">' + body + '</div></div>');
-            }else{
+		var logmsg = '<div>';
+		if(NoteableChat.lastmessagefrom != nickname) //skip nickname if from same nickname
+		{
+		    logmsg += '<div class="noteablechat_log_nickname">' + nickname + ': </div>';
+		}
+		logmsg += '<div class="noteablechat_log_timestamp">' + timestamp + '</div><div class="noteablechat_log_message">' + body + '</div></div>';
+		
+                NoteableChat.addMessage(logmsg);
+		NoteableChat.lastmessagefrom = nickname;
+	    }else{
                 NoteableChat.addMessage('<div>***' + body + '</div>');
             }
         }
