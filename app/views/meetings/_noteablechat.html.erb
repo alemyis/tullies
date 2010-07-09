@@ -10,10 +10,12 @@
     <div id="noteablechat_roster"></div>
     <div id="noteablechat_chatlog"></div>
   </div>
+  <% if(!readonly) %>
   <div>
     <textarea id='noteablechat_msgArea'></textarea>
     <div>
       <input id='noteablechat_postButton' type="submit" value="Post" tabindex="3"/>
     </div>
   </div>
+  <% end %>
 </div>

@@ -210,7 +210,7 @@ var NoteableChat = {
 	    }
 	    var subject = $(msg).children('subject').text();
             if(subject){
-                $('#noteablechat_topic').text(subject);
+                $('#noteablechat_topic').text('Currently Discussing:' + subject);
             }else if(!notice){
                 NoteableChat.addMessage('<div><div class="noteablechat_log_timestamp">' + timestamp + '</div><div class="noteablechat_log_nickname">' + nickname + ': </div><div class="noteablechat_log_message">' + body + '</div></div>');
             }else{
