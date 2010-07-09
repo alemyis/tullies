@@ -13,7 +13,7 @@ Noteable chat:
 	./public/javascripts/noteablechat.js
 	./public/stylesheets/noteablechat.css
 
-   --usage exmple
+   --usage example
 	./app/models/meeting.rb
 	./config/routes.rb
 	./config/environments/development.rb

@@ -9,6 +9,8 @@ class MeetingsController < ApplicationController
   end
   
   def show
+    #session[:user_jid] = 'logged in user jid node (node@domain)'
+    #session[:user_password] = 'logged in user password'
     @meeting = Meeting.find(params[:id])
   end
   

@@ -5,11 +5,11 @@ require 'xmpp4r/muc/helper/simplemucclient'
 
 class NoteablechatController < ApplicationController
   def new_boshsession
+    username = session[:user_jid].nil? ? get_jid() : session[:user_jid]
+    password = session[:user_password].nil? ? NOTEABLECHAT_CONFIG['default_pwd'] : session[:user_password]
     
     xmpp_server = NOTEABLECHAT_CONFIG['xmpp_server']
     xmpp_bosh_port = NOTEABLECHAT_CONFIG['xmpp_bosh_port']
-    username = get_jid()
-    password = NOTEABLECHAT_CONFIG['default_pwd']
     jid = "#{username}@#{xmpp_server}"
     server_url = "http://#{xmpp_server}:#{xmpp_bosh_port}/http-bind/"
     room = "#{params[:room_jid]}@#{NOTEABLECHAT_CONFIG['muc_namespace']}"
@@ -24,11 +24,11 @@ class NoteablechatController < ApplicationController
   end
   
   def get_jid
-    if(session[:guest_jid].nil?)
-      session[:guest_jid] = "#{NOTEABLECHAT_CONFIG['guest_jid']}#{rand(9999)}"
-      create_jid(session[:guest_jid])
+    if(session[:user_jid].nil?)
+      session[:user_jid] = "#{NOTEABLECHAT_CONFIG['guest_jid']}#{rand(9999)}"
+      create_jid(session[:user_jid])
     end
-    session[:guest_jid]
+    session[:user_jid]
   end
 
   def create_jid(username)
