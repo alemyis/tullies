@@ -159,19 +159,14 @@ var NoteableChat = {
             } else if (!NoteableChat.participants[nickname] && $(pres).attr('type') !== 'unavailable'){
                 var user_jid = $(pres).find('item').attr('jid');
                 NoteableChat.participants[nickname] = user_jid || true;
-                $('#noteablechat_roster').append('<li>' + nickname + '</li>');
+                $('#noteablechat_roster').append('<li id="li' + nickname + '">' + NoteableChat._stripTimeStampFromNickname(nickname) + '</li>');
                 
                 if(NoteableChat.joined){
                     $(document).trigger('user_joined', nick);
                 }
             } else if (NoteableChat.participants[nickname] && $(pres).attr('type') === 'unavailable'){
-                $('#noteablechat_roster li').each(function(){
-                    if(nickname === $(this).text()){
-                        $(this).remove();
-                        //return false;
-                    }
-                });
-                
+                $('#li_' + nickname).remove();
+		NoteableChat.participants[nickname] = false;
                 $(document).trigger('user_left', nickname);
             }
         }
@@ -216,7 +211,7 @@ var NoteableChat = {
 		var logmsg = '<div>';
 		if(NoteableChat.lastmessagefrom != nickname) //skip nickname if from same nickname
 		{
-		    logmsg += '<div class="noteablechat_log_nickname">' + nickname + ': </div>';
+		    logmsg += '<div class="noteablechat_log_nickname">' + NoteableChat._stripTimeStampFromNickname(nickname) + ': </div>';
 		}
 		logmsg += '<div class="noteablechat_log_timestamp">' + timestamp + '</div><div class="noteablechat_log_message">' + body + '</div></div>';
 		
@@ -269,6 +264,10 @@ var NoteableChat = {
 	    if(console)
 		console.log(msg);
 	}catch(e){}
+    },
+    _stripTimeStampFromNickname : function(nickname){
+	//e.g. Guest1324:~:1278889735, alem:~:1278889735
+	return nickname.split(':~:')[0];
     }
 }
 
@@ -302,11 +301,11 @@ $(document).bind('room_joined', function(){
 });
 
 $(document).bind('user_joined', function(e, nickname){
-    NoteableChat.addMessage("<div class='noteablechat_log_user_joined'>" + nickname + " joined.</div>")
+    NoteableChat.addMessage("<div class='noteablechat_log_user_joined'>" + NoteableChat._stripTimeStampFromNickname(nickname) + " joined.</div>")
 });
 
 $(document).bind('user_left', function(e, nickname){
-    NoteableChat.addMessage("<div class='noteablechat_log_user_left'>" + nickname + " left.</div>")
+    NoteableChat.addMessage("<div class='noteablechat_log_user_left'>" + NoteableChat._stripTimeStampFromNickname(nickname) + " left.</div>")
 });
 
 //

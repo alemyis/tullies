@@ -13,7 +13,7 @@ class NoteablechatController < ApplicationController
     jid = "#{username}@#{xmpp_server}"
     server_url = "http://#{xmpp_server}:#{xmpp_bosh_port}/http-bind/"
     room = "#{params[:room_jid]}@#{NOTEABLECHAT_CONFIG['muc_namespace']}"
-    nickname = "#{username}#{Time.new.tv_sec}"
+    nickname = "#{username}:~:#{Time.new.tv_sec}" #append timestamp to make sure nickname is unique
     
     @session_jid, @session_id, @session_random_id = RubyBOSH.initialize_session(jid,
                                                                                 password,
