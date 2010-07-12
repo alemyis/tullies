@@ -1,6 +1,6 @@
 <% title "Meeting" %>
 <div style="float:right">
-  <%= render "noteablechat", :service => "/noteablechat/boshsession/#{Noteablechat.get_MUC_name(@meeting.id.to_s)}", :readonly => false %>
+  <%= render "noteablechat", :service => "/noteablechat/boshsession/#{Noteablechat.get_MUC_name(@meeting.id.to_s)}", :readonly => !@meeting.active? %>
 </div>
 <div>
   <p>

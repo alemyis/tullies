@@ -23,6 +23,11 @@ class Meeting < ActiveRecord::Base
         end
     end
     
+    def active?
+      now = Time.now
+      start_at < now
+    end
+    
     def after_create
       Noteablechat.create_room(self.id.to_s)
     end
